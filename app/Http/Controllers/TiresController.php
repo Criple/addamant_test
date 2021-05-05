@@ -22,8 +22,6 @@ class TiresController extends Controller
     {
         $validTires = Tires::where('parsed_valid', 1)->orderBy('id')->get();
         $notValidTires = Tires::where('parsed_valid', 0)->orderBy('id')->get();
-        $manufacturers = TiresManufacturers::all();
-        $models = TiresModels::all();
         return view('tires.index', compact('validTires', 'notValidTires'));
     }
 
@@ -75,7 +73,7 @@ class TiresController extends Controller
         if ($request->file('xlsx-file')->isValid()) {
             Excel::import(new TiresImport, $request->file('xlsx-file'));
         }
-        //return redirect('/');
+        return redirect('/');
     }
 
 }
